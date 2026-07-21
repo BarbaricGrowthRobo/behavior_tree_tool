@@ -1,0 +1,192 @@
+{
+  "version": "1.0",
+  "project_name": "robot_behavior_tree",
+  "description": "通用机器人行为树节点注册表 - 示例配置",
+  "nodes": {
+    "Sequence": {
+      "type": "control",
+      "ports": [],
+      "description": "顺序执行子节点"
+    },
+    "Fallback": {
+      "type": "control",
+      "ports": [],
+      "description": "回退节点（类似OR逻辑）"
+    },
+    "Parallel": {
+      "type": "control",
+      "ports": [
+        {"name": "threshold", "type": "int", "default": "-1"}
+      ],
+      "description": "并行执行子节点"
+    },
+    "ReactiveSequence": {
+      "type": "control",
+      "ports": [],
+      "description": "响应式序列"
+    },
+    "ReactiveFallback": {
+      "type": "control",
+      "ports": [],
+      "description": "响应式回退"
+    },
+    "RetryUntilSuccessful": {
+      "type": "control",
+      "ports": [
+        {"name": "num_attempts", "type": "string", "default": "1"}
+      ],
+      "description": "重试直到成功"
+    },
+    "Repeat": {
+      "type": "control",
+      "ports": [
+        {"name": "num_cycles", "type": "int", "default": "1"}
+      ],
+      "description": "重复执行"
+    },
+    "Inverter": {
+      "type": "control",
+      "ports": [],
+      "description": "取反节点"
+    },
+    "ForceSuccess": {
+      "type": "control",
+      "ports": [],
+      "description": "强制成功"
+    },
+    "ForceFailure": {
+      "type": "control",
+      "ports": [],
+      "description": "强制失败"
+    },
+    "Delay": {
+      "type": "control",
+      "ports": [
+        {"name": "delay_msec", "type": "int", "default": "0"}
+      ],
+      "description": "延迟执行"
+    },
+    "CheckBattery": {
+      "type": "condition",
+      "ports": [
+        {"name": "min_level", "type": "string", "default": "20"}
+      ],
+      "description": "检查电池电量"
+    },
+    "CheckObstacle": {
+      "type": "condition",
+      "ports": [
+        {"name": "distance", "type": "string", "default": "1.0"}
+      ],
+      "description": "检查障碍物"
+    },
+    "CheckLocation": {
+      "type": "condition",
+      "ports": [
+        {"name": "target", "type": "string", "default": ""}
+      ],
+      "description": "检查当前位置"
+    },
+    "CheckMapLoaded": {
+      "type": "condition",
+      "ports": [],
+      "description": "检查地图是否加载"
+    },
+    "CheckObjectDetected": {
+      "type": "condition",
+      "ports": [
+        {"name": "object_type", "type": "string", "default": "any"}
+      ],
+      "description": "检查是否检测到物体"
+    },
+    "CheckGripperState": {
+      "type": "condition",
+      "ports": [
+        {"name": "state", "type": "string", "default": "closed"}
+      ],
+      "description": "检查夹爪状态"
+    },
+    "NavigateToTarget": {
+      "type": "action",
+      "ports": [
+        {"name": "navigation_mode", "type": "string", "default": "1"},
+        {"name": "ref_vel", "type": "string", "default": "{ref_vel}"},
+        {"name": "flat_direction", "type": "string", "default": "{flat_direction}"},
+        {"name": "seg_id", "type": "string", "default": "{seg_id}"},
+        {"name": "to_point_id", "type": "string", "default": "{to_point_id}"},
+        {"name": "timeout", "type": "string", "default": "300"}
+      ],
+      "description": "导航到目标点"
+    },
+    "NavigateToGoal": {
+      "type": "action",
+      "ports": [
+        {"name": "goal", "type": "string", "default": ""},
+        {"name": "max_speed", "type": "string", "default": "1.0"},
+        {"name": "tolerance", "type": "string", "default": "0.1"},
+        {"name": "timeout", "type": "string", "default": "60"}
+      ],
+      "description": "导航到目标点"
+    },
+    "MoveToPose": {
+      "type": "action",
+      "ports": [
+        {"name": "target_pose", "type": "string", "default": ""},
+        {"name": "speed", "type": "string", "default": "5"},
+        {"name": "wait_time", "type": "string", "default": "30"}
+      ],
+      "description": "移动到目标位姿"
+    },
+    "MoveToHome": {
+      "type": "action",
+      "ports": [
+        {"name": "speed", "type": "string", "default": "50"}
+      ],
+      "description": "移动到初始位置"
+    },
+    "GripperControl": {
+      "type": "action",
+      "ports": [
+        {"name": "action", "type": "string", "default": "open"},
+        {"name": "speed", "type": "string", "default": "50.0"},
+        {"name": "force", "type": "string", "default": "0.0"}
+      ],
+      "description": "夹爪控制"
+    },
+    "SetWarningLight": {
+      "type": "action",
+      "ports": [
+        {"name": "color", "type": "string", "default": "green"}
+      ],
+      "description": "设置警示灯颜色"
+    },
+    "SetLED": {
+      "type": "action",
+      "ports": [
+        {"name": "color", "type": "string", "default": "green"},
+        {"name": "pattern", "type": "string", "default": "solid"}
+      ],
+      "description": "设置LED状态"
+    },
+    "Wait": {
+      "type": "action",
+      "ports": [
+        {"name": "duration", "type": "string", "default": "1.0"}
+      ],
+      "description": "等待指定时间"
+    },
+    "DockToCharger": {
+      "type": "action",
+      "ports": [
+        {"name": "charger_id", "type": "string", "default": ""},
+        {"name": "approach_speed", "type": "string", "default": "0.2"}
+      ],
+      "description": "对接充电桩"
+    },
+    "Stop": {
+      "type": "action",
+      "ports": [],
+      "description": "停止机器人"
+    }
+  }
+}

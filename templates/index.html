@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Behavior Tree 可视化管理工具</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>🌳 Behavior Tree 管理器</h1>
+        <div class="header-center">
+            <div class="folder-selector">
+                <label>📂 行为树文件夹:</label>
+                <input type="text" id="btDirInput" placeholder="输入文件夹路径，例如: /home/user/behavior_trees">
+                <button class="btn-secondary" onclick="loadBtDirectory()">加载行为树列表</button>
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="btn-primary" onclick="showCreateModal()">+ 新建行为树</button>
+            <button class="btn-success" onclick="saveCurrentTree()">💾 保存</button>
+            <button class="btn-secondary" onclick="loadAllFiles()">🔄 刷新</button>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="sidebar">
+            <h3>📁 行为树文件</h3>
+            <ul class="file-list" id="fileList"></ul>
+        </div>
+
+        <div class="content">
+            <div class="toolbar" id="toolbar" style="display: none;">
+                <span style="font-size: 13px; color: #a6adc8;">添加节点:</span>
+                <select id="nodeTypeSelect">
+                    <option value="">-- 选择节点类型 --</option>
+                </select>
+                <button class="btn-primary" onclick="addNodeToSelected()">+ 添加为子节点</button>
+                <button class="btn-secondary" onclick="addSiblingNode()">+ 添加为兄弟节点</button>
+                <button class="btn-danger" onclick="deleteSelectedNode()">🗑 删除</button>
+                <button class="btn-secondary xml-preview-toggle" onclick="toggleXmlPreview()">📄 XML预览</button>
+            </div>
+
+            <div class="tree-container" id="treeContainer">
+                <div class="tree-viewport" id="treeViewport" style="transform-origin: 0 0;">
+                    <svg class="tree-svg" id="treeSvg"></svg>
+                    <div class="tree-content" id="treeContent">
+                        <div class="empty-state">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                            <p>选择左侧行为树文件开始编辑</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="zoom-controls">
+                    <button class="zoom-btn" onclick="zoomIn()" title="放大">+</button>
+                    <button class="zoom-btn" onclick="zoomOut()" title="缩小">−</button>
+                    <button class="zoom-btn" onclick="resetZoom()" title="重置"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- XML 预览模态框 -->
+    <div class="modal-overlay" id="xmlModal">
+        <div class="modal" style="width: 700px;">
+            <div class="modal-header">
+                <h3>XML 预览</h3>
+                <button class="modal-close" onclick="closeXmlModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <pre id="xmlPreviewContent" style="background: #313244; padding: 14px; border-radius: 6px; font-size: 12px; overflow: auto; max-height: 60vh; white-space: pre-wrap; color: #a6e3a1;"></pre>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeXmlModal()">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 节点编辑模态框 -->
+    <div class="modal-overlay" id="editModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">编辑节点</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>节点名称 (name)</label>
+                    <input type="text" id="editNodeName" placeholder="可选，留空使用默认名称">
+                </div>
+                <div class="form-group">
+                    <label>端口参数 (Ports)</label>
+                    <div class="port-editor" id="portEditor"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeModal()">取消</button>
+                <button class="btn-primary" onclick="saveNodeEdit()">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新建行为树模态框 -->
+    <div class="modal-overlay" id="createModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>新建行为树</h3>
+                <button class="modal-close" onclick="closeCreateModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>文件名 (不含扩展名)</label>
+                    <input type="text" id="newFilename" placeholder="例如: my_task">
+                </div>
+                <div class="form-group">
+                    <label>行为树 ID</label>
+                    <input type="text" id="newBtId" placeholder="例如: MY_TASK">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeCreateModal()">取消</button>
+                <button class="btn-primary" onclick="createNewTree()">创建</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<root BTCPP_format="3" main_tree_to_execute="PICK_AND_PLACE">
+    <BehaviorTree ID="PICK_AND_PLACE">
+        <Sequence name="pick_and_place_sequence">
+            <!-- 移动到初始位置 -->
+            <MoveToHome speed="50"/>
+            
+            <!-- 检查是否检测到物体 -->
+            <CheckObjectDetected object_type="target"/>
+            
+            <!-- 移动到抓取位置 -->
+            <MoveToPose x="0.3" y="0" z="0.2" speed="50"/>
+            
+            <!-- 打开夹爪 -->
+            <GripperControl action="open" speed="50.0" force="0.0"/>
+            
+            <!-- 下降到抓取高度 -->
+            <MoveToPose x="0.3" y="0" z="0.05" speed="30"/>
+            
+            <!-- 关闭夹爪抓取物体 -->
+            <GripperControl action="close" speed="30.0" force="50.0"/>
+            
+            <!-- 抬起物体 -->
+            <MoveToPose x="0.3" y="0" z="0.2" speed="30"/>
+            
+            <!-- 移动到放置位置 -->
+            <MoveToPose x="0.5" y="0.3" z="0.2" speed="50"/>
+            
+            <!-- 下降到放置高度 -->
+            <MoveToPose x="0.5" y="0.3" z="0.05" speed="30"/>
+            
+            <!-- 打开夹爪释放物体 -->
+            <GripperControl action="open" speed="50.0" force="0.0"/>
+            
+            <!-- 抬起机械臂 -->
+            <MoveToPose x="0.5" y="0.3" z="0.2" speed="30"/>
+            
+            <!-- 设置状态灯 -->
+            <SetWarningLight color="green"/>
+        </Sequence>
+    </BehaviorTree>
+</root>

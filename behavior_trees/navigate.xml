@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<root BTCPP_format="3" main_tree_to_execute="NAVIGATE">
+    <BehaviorTree ID="NAVIGATE">
+        <Sequence name="navigate_sequence">
+            <!-- 设置状态灯 -->
+            <SetWarningLight color="green"/>
+            
+            <!-- 导航到目标点 -->
+            <NavigateToTarget 
+                navigation_mode="1"
+                ref_vel="{ref_vel}"
+                flat_direction="{flat_direction}"
+                seg_id="{seg_id}"
+                to_point_id="{to_point_id}"
+                timeout="300"/>
+        </Sequence>
+    </BehaviorTree>
+</root>

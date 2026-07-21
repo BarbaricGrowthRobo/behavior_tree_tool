@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<root BTCPP_format="3" main_tree_to_execute="AUTO_CHARGE">
+    <BehaviorTree ID="AUTO_CHARGE">
+        <Sequence name="charge_sequence">
+            <!-- 检查电量 -->
+            <CheckBattery min_level="20"/>
+            
+            <!-- 设置状态灯 -->
+            <SetLED color="yellow" pattern="blink"/>
+            
+            <!-- 导航到充电桩 -->
+            <DockToCharger 
+                charger_id="charger_01"
+                approach_speed="0.2"/>
+            
+            <!-- 等待充电 -->
+            <Wait duration="3600.0"/>
+            
+            <!-- 充电完成 -->
+            <SetLED color="green" pattern="solid"/>
+        </Sequence>
+    </BehaviorTree>
+</root>

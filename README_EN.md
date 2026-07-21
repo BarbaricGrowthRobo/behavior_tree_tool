@@ -10,14 +10,14 @@ A visual behavior tree editor and management tool based on Flask + Frontend, sup
 
 ## Table of Contents
 
-- [Features](#-features)
-- [Requirements](#-requirements)
-- [Quick Start](#-quick-start)
-- [Usage Guide](#-usage-guide)
-- [Configuration](#-configuration)
-- [Project Structure](#-project-structure)
-- [Example Configs](#-example-configs)
-- [License](#-license)
+- [Features](#features)
+- [Requirements](#requirements)
+- [Quick Start](#quick-start)
+- [Usage Guide](#usage-guide)
+- [Configuration](#configuration)
+- [Project Structure](#project-structure)
+- [Example Configs](#example-configs)
+- [License](#license)
 
 ---
 
@@ -151,6 +151,7 @@ behavior_tree_tool/
 ├── LICENSE                    # MIT License
 ├── README.md                  # Documentation (English)
 ├── README_CN.md               # Documentation (Chinese)
+├── README_EN.md               # Documentation (English)
 ├── NODE_REGISTRY_CONFIG.md    # Node registry detailed documentation
 ├── behavior_trees/            # Behavior tree XML files directory (examples)
 │   ├── navigate.xml           # Navigation example

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<root BTCPP_format="3" main_tree_to_execute="PATROL">
+    <BehaviorTree ID="PATROL">
+        <Sequence name="patrol_sequence">
+            <!-- 检查电量 -->
+            <CheckBattery min_level="20"/>
+            
+            <!-- 设置状态灯 -->
+            <SetLED color="green"/>
+            
+            <!-- 巡逻点A -->
+            <NavigateToGoal 
+                goal="point_a"
+                max_speed="1.0"
+                tolerance="0.1"
+                timeout="60"/>
+            
+            <!-- 等待 -->
+            <Wait duration="2.0"/>
+            
+            <!-- 巡逻点B -->
+            <NavigateToGoal 
+                goal="point_b"
+                max_speed="1.0"
+                tolerance="0.1"
+                timeout="60"/>
+        </Sequence>
+    </BehaviorTree>
+</root>
